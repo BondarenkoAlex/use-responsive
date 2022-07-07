@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import {useState, useEffect} from 'react';
 import { useMediaQueryListener } from './useMediaQueryListener';
 import { matchMedia } from './matchMedia';
 import { defaultQueryFn } from './constants';
@@ -12,16 +12,24 @@ const mql = {
 };
 
 export const useMatchMediaDefault = (device: TDeviceType) => {
-	const matchesMobile = useMediaQueryListener(mql.mobile as MediaQueryList, device === 'mobile');
-	const matchesTablet = useMediaQueryListener(mql.tablet as MediaQueryList, device === 'tablet');
-	const matchesDesktop = useMediaQueryListener(mql.desktop as MediaQueryList, device === 'desktop');
+	const [newDevice, setNewDevice] = useState(device);
 
-	return useMemo(
-		() => getKeyByTrueValue({
+	const matchesMobile = useMediaQueryListener(mql.mobile as MediaQueryList);
+	const matchesTablet = useMediaQueryListener(mql.tablet as MediaQueryList);
+	const matchesDesktop = useMediaQueryListener(mql.desktop as MediaQueryList);
+
+	console.log('newDevice', newDevice);
+	useEffect(() => {
+		const newDevice = getKeyByTrueValue({
 			mobile: matchesMobile && !matchesTablet,
 			tablet: matchesTablet && !matchesDesktop,
 			desktop: matchesDesktop,
-		}),
-		[matchesMobile, matchesTablet, matchesDesktop],
-	);
+		});
+
+		if(newDevice !== undefined){
+			setNewDevice(newDevice as TDeviceType);
+		}
+	}, [matchesMobile, matchesTablet, matchesDesktop]);
+
+	return newDevice;
 };

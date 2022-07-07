@@ -21,7 +21,7 @@ export const useMatchMedia = ({
 		return [device, {}];
 	}
 
-	const newDeviceDefault = useMatchMediaDefault(device) as TDeviceType;
+	const newDeviceDefault = useMatchMediaDefault(device);
 	const matchesCustomQueryObj = useMatchMediaCustom(queriesMedia);
 
 	return [newDeviceDefault, matchesCustomQueryObj];

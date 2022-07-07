@@ -6,7 +6,7 @@ export const useMatchMediaCustom = (customQueryObj: TMedia = {}) => {
 	const result: TDeviceTypeTrueFalse = {};
 	Object.entries(customQueryObj).forEach(([key, customQuery]) => {
 		var mql = matchMedia(customQuery);
-		result[key] = useMediaQueryListener(mql as MediaQueryList, false);
+		result[key] = useMediaQueryListener(mql as MediaQueryList);
 	});
 	return result;
 };
