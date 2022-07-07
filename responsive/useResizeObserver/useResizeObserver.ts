@@ -39,7 +39,7 @@ export const useResizeObserver = ({
 		const newCustomObjState = calculateState(queriesObserver, width);
 		setNewDeviceCustomObj(prevState => {
 			const isNotEqual = Object
-				.keys(prevState)
+				.keys(newCustomObjState)
 				.some(key => prevState[key] !== newCustomObjState[key]);
 
 			return isNotEqual ? newCustomObjState : prevState;

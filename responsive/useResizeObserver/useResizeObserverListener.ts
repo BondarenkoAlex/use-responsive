@@ -3,7 +3,7 @@ import { resizeObserver } from './resizeObserver';
 
 export const useResizeObserverListener = (callback: (width: number) => void, ref:  React.RefObject<HTMLElement>) => {
 	useEffect(() => {
-		if (ref.current !== null) {
+		if (!!ref.current) {
 			const observer = resizeObserver((width: number) => callback(width));
 			observer.observe(ref.current);
 
