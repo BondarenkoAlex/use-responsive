@@ -12,7 +12,7 @@ export const useResponsive = ({
   queries = {},
 }: TResponsiveProps): [TDeviceType, RefObject<HTMLElement> | undefined, TDeviceTypeTrueFalse] => {
 	if (!device) {
-		return device;
+		return ['mobile', undefined, {}];
 	}
 
 	let newDevice:TDeviceType;
