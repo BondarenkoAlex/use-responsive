@@ -1,14 +1,14 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useMediaQueryListener } from './useMediaQueryListener';
 import { matchMedia } from './matchMedia';
 import { defaultQueryFn } from './constants';
 import { getKeyByTrueValue } from '../share/getKeyByTrueValue';
-import {TDeviceType} from "../share/types";
+import { TDeviceType } from '../share/types';
 
 const mql = {
 	mobile: matchMedia(defaultQueryFn.mobile),
 	tablet: matchMedia(defaultQueryFn.tablet),
-	desktop: matchMedia(defaultQueryFn.desktop)
+	desktop: matchMedia(defaultQueryFn.desktop),
 };
 
 export const useMatchMediaDefault = (device: TDeviceType) => {
@@ -26,7 +26,7 @@ export const useMatchMediaDefault = (device: TDeviceType) => {
 			desktop: matchesDesktop,
 		});
 
-		if(newDevice !== undefined){
+		if (newDevice !== undefined) {
 			setNewDevice(newDevice as TDeviceType);
 		}
 	}, [matchesMobile, matchesTablet, matchesDesktop]);

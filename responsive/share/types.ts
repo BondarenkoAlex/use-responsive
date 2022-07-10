@@ -2,23 +2,23 @@
 export type TDeviceType = 'mobile' | 'tablet' | 'desktop';
 
 export type TDeviceTypeTrueFalse = {
-	[key: string]: boolean,
+	[key: string]: boolean;
 };
 
 export type TObserver = {
-	[key: string]: (width: number) => boolean,
-}
+	[key: string]: (width: number) => boolean;
+};
 
 export type TMedia = {
-	[key: string]: string,
-}
+	[key: string]: string;
+};
 
 export type TQueries = {
-	observer?: TObserver,
-	media?: TMedia,
-}
+	observer?: TObserver;
+	media?: TMedia;
+};
 
 export type TResponsiveProps = {
-	device: TDeviceType,
-	queries?: TQueries,
-}
+	device: TDeviceType;
+	queries?: TQueries;
+};

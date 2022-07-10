@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { resizeObserver } from './resizeObserver';
 
-export const useResizeObserverListener = (callback: (width: number) => void, ref:  React.RefObject<HTMLElement>) => {
+export const useResizeObserverListener = (
+	callback: (width: number) => void,
+	ref: React.RefObject<HTMLElement>,
+) => {
 	useEffect(() => {
 		if (!!ref.current) {
 			const observer = resizeObserver((width: number) => callback(width));

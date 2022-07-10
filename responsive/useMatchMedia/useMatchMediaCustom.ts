@@ -1,6 +1,7 @@
-import {useMediaQueryListener} from './useMediaQueryListener';
-import {matchMedia} from './matchMedia';
-import {TDeviceTypeTrueFalse, TMedia} from "../share/types";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useMediaQueryListener } from './useMediaQueryListener';
+import { matchMedia } from './matchMedia';
+import { TDeviceTypeTrueFalse, TMedia } from '../share/types';
 
 export const useMatchMediaCustom = (customQueryObj: TMedia = {}) => {
 	const result: TDeviceTypeTrueFalse = {};
@@ -10,4 +11,3 @@ export const useMatchMediaCustom = (customQueryObj: TMedia = {}) => {
 	});
 	return result;
 };
-

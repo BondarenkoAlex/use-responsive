@@ -1,8 +1,11 @@
+// todo npm i -D @types/resize-observer-browser https://bobbyhadz.com/blog/typescript-cannot-find-name-resizeobserver
+
 export const resizeObserver = (callback: (width: number) => void) => {
 	let entry;
 	let contentBoxSize;
 	let width: number;
-	return new ResizeObserver((entries) => {
+	// @ts-ignore
+	return new ResizeObserver(entries => {
 		entry = entries[0];
 		if (entry.contentBoxSize) {
 			contentBoxSize = Array.isArray(entry.contentBoxSize)
@@ -14,4 +17,4 @@ export const resizeObserver = (callback: (width: number) => void) => {
 		}
 		callback(width);
 	});
-}
+};

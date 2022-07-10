@@ -1,26 +1,21 @@
-import {useCallback, useState, useRef, RefObject} from 'react';
-import {useResizeObserverListener} from './useResizeObserverListener';
-import {supportResizeObserver} from './supportResizeObserver';
-import {defaultQueryFn} from './constants';
-import {getKeyByTrueValue} from '../share/getKeyByTrueValue';
-import {
-	TDeviceType,
-	TDeviceTypeTrueFalse,
-	TQueries,
-	TResponsiveProps
-} from "../share/types";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useCallback, useState, useRef, RefObject } from 'react';
+import { useResizeObserverListener } from './useResizeObserverListener';
+import { supportResizeObserver } from './supportResizeObserver';
+import { defaultQueryFn } from './constants';
+import { getKeyByTrueValue } from '../share/getKeyByTrueValue';
+import { TDeviceType, TDeviceTypeTrueFalse, TQueries, TResponsiveProps } from '../share/types';
 
 const DEFAULT_OBJ = {};
 
-type TResizeObserverProps =
-	Pick<TResponsiveProps, 'device'> & {
-	queriesObserver: TQueries['observer']
+type TResizeObserverProps = Pick<TResponsiveProps, 'device'> & {
+	observer: TQueries['observer'];
 };
-type TQueriesObserver = TResizeObserverProps['queriesObserver'];
+type TObserver = TResizeObserverProps['observer'];
 
 export const useResizeObserver = ({
-  device,
-  queriesObserver
+	device,
+	observer,
 }: TResizeObserverProps): [TDeviceType, RefObject<HTMLElement>, TDeviceTypeTrueFalse] => {
 	const ref = useRef() as RefObject<HTMLElement>;
 
@@ -36,14 +31,15 @@ export const useResizeObserver = ({
 		const device = getKeyByTrueValue(newDefaultObjState);
 		setNewDeviceDefault(device as TDeviceType);
 
-		const newCustomObjState = calculateState(queriesObserver, width);
+		const newCustomObjState = calculateState(observer, width);
 		setNewDeviceCustomObj(prevState => {
-			const isNotEqual = Object
-				.keys(newCustomObjState)
-				.some(key => prevState[key] !== newCustomObjState[key]);
+			const isNotEqual = Object.keys(newCustomObjState).some(
+				key => prevState[key] !== newCustomObjState[key],
+			);
 
 			return isNotEqual ? newCustomObjState : prevState;
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useResizeObserverListener(handle, ref);
@@ -64,7 +60,7 @@ export const useResizeObserver = ({
  *    desktop: false,
  * }
  * */
-function calculateState(customQueryObjFn: TQueriesObserver, width: number) {
+function calculateState(customQueryObjFn: TObserver, width: number) {
 	const newState: TDeviceTypeTrueFalse = {};
 	if (!!customQueryObjFn) {
 		Object.entries(customQueryObjFn).forEach(([key, queryFn]) => {
